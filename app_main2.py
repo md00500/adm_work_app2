@@ -44,13 +44,8 @@ def upload_file():
             data = np.array([img])
             #変換したデータをモデルに渡して予測する
             result = model.predict(data)[0]
-            result = np.argmax(result)
-            if(result == 0):
-              pred_answer = "これは 一般画像 です"
-            elif(result == 1):
-              pred_answer = "これは ドキュメント画像 です"
-            else:
-              pred_answer = "これは アート画像 です"
+            predicted = np.argmax(result)
+            pred_answer = "これは " + classes[predicted] + " です"
 
             return render_template("index.html",answer=pred_answer)
 
